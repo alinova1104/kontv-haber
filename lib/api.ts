@@ -19,7 +19,7 @@ export const fetchData = async (endpoint: string, id?: unknown) => {
 };
 
 export const updateData = async (endpoint: string, data: unknown) => {
-  const response = await fetch(`http://localhost:3001/${endpoint}`, {
+  const response = await fetch(`https://api.tv42.com.tr/${endpoint}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export const updateData = async (endpoint: string, data: unknown) => {
 
 // Add veri (Yeni veri eklemek için)
 export const addData = async (endpoint: string, data: unknown) => {
-  const response = await fetch(`http://localhost:3001/${endpoint}`, {
+  const response = await fetch(`https://api.tv42.com.tr/${endpoint}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export const addData = async (endpoint: string, data: unknown) => {
 };
 
 export const deleteData = async (endpoint: string, id: number) => {
-  const response = await fetch(`http://localhost:3001/${endpoint}/${id}`, {
+  const response = await fetch(`https://api.tv42.com.tr/${endpoint}/${id}`, {
     method: 'DELETE',
   });
 
