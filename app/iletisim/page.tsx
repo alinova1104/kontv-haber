@@ -26,7 +26,7 @@ export default function Iletisim() {
         const socialmedia = datas.socialmedia || {};
 
         // Normalize phone and faxs to always be arrays of strings
-        const normalizeField = (field: any) => {
+        const normalizeField = (field: string | string[] | undefined | null): string[] => {
           if (Array.isArray(field)) {
             // If it's an array with a single comma-separated string, split it
             if (field.length === 1 && typeof field[0] === "string" && field[0].includes(",")) {
