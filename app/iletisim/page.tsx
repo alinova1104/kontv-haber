@@ -119,7 +119,7 @@ export default function Iletisim() {
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">Telefon</h2>
                 {/*<p>444 0 155</p>*/}
-                {phones.map((phone, index) => (
+                {phones && phones.map((phone, index) => (
                   <span key={index}>{phone}{index < phones.length - 1 ? <br /> : ""}</span>
                 ))}
               </div>
@@ -127,7 +127,7 @@ export default function Iletisim() {
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">Fax</h2>
                 {/*<p>0(332) 350 43 04</p>*/}
-                {faxs.map((fax, index) => (
+                {faxs && faxs.map((fax, index) => (
                   <span key={index}>{fax}{index < faxs.length - 1? <br /> : ""}</span>
                 ))}
               </div>
@@ -135,7 +135,7 @@ export default function Iletisim() {
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">E-Posta</h2>
                 {/*<p>bilgi@kontv.com.tr</p>*/}
-                {emails.map((email, index) => (
+                {emails && emails.map((email, index) => (
                   <span key={index}>{email}{index < emails.length - 1? <br /> : ""}</span>
                 ))}
               </div>
