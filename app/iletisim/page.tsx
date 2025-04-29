@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 
 export default function Iletisim() {
 
-  const [phones, setPhones] = useState<string[]>([""]); // Dizi olarak telefon numaraları
-  const [faxs, setFaxs] = useState<string[]>([""]); // Dizi olarak telefon numaraları
-  const [emails, setEmails] = useState<string[]>([""]); // Dizi olarak e-posta adresleri
+  //const [phones, setPhones] = useState<string[]>([""]); // Dizi olarak telefon numaraları
+  //const [faxs, setFaxs] = useState<string[]>([""]); // Dizi olarak telefon numaraları
+  //const [emails, setEmails] = useState<string[]>([""]); // Dizi olarak e-posta adresleri
   const [address, setAddress] = useState<string>("");
   const [googleMapsLink, setGoogleMapsLink] = useState<string | null>(null);
   
@@ -26,9 +26,9 @@ export default function Iletisim() {
         const socialmedia = datas.socialmedia || {};
         
         // Ensure array values
-        setPhones(contact?.phone ? [contact.phone] : []);
-        setFaxs(contact?.faxs ? [contact.faxs] : []);
-        setEmails(contact?.email ? [contact.email] : []);
+        //setPhones(contact?.phone ? [contact.phone] : []);
+        //setFaxs(contact?.faxs ? [contact.faxs] : []);
+        //setEmails(contact?.email ? [contact.email] : []);
         
         setAddress(contact?.address || "");
         setGoogleMapsLink(contact?.maps || null);
