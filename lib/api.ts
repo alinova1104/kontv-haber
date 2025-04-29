@@ -2,7 +2,7 @@
 import { toast } from "sonner"; // Ensure you import the correct toast function
 
 export const fetchData = async (endpoint: string, id?: unknown) => {
-  let fetchUrl = `http://localhost:3001/${endpoint}`;
+  let fetchUrl = `https://api.tv42.com.tr/${endpoint}`;
   
   if (id) {
     fetchUrl += `/${id}`; // Eğer id varsa, URL'ye ekle
