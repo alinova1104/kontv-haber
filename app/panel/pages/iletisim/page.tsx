@@ -63,9 +63,11 @@ export default function EditPage() {
       try {
         const datas = await fetchContactPageData();
         const data = datas.contact;
-        setPhones(data.phone);
-        setFaxs(data.faxs);
-        setEmails(data.email);
+
+        // Ensure these are always arrays
+        setPhones(Array.isArray(data.phone) ? data.phone : data.phone ? [data.phone] : []);
+        setFaxs(Array.isArray(data.faxs) ? data.faxs : data.faxs ? [data.faxs] : []);
+        setEmails(Array.isArray(data.email) ? data.email : data.email ? [data.email] : []);
         setAddress(data.address);
         setGoogleMapsLink(data.maps);
         console.log(datas);
@@ -230,7 +232,7 @@ export default function EditPage() {
                 {/* İletişim Bilgileri */}
                 <TabsContent value="content">
                   <label htmlFor="phone" className="block text-sm font-medium text-muted-foreground">Telefon</label>
-                  {(Array.isArray(phones) ? phones : []).map((phone, index) => (
+                  {phones.map((phone, index) => (
                     <div key={index} className="flex items-center">
                       <Input
                         value={phone}
@@ -246,7 +248,7 @@ export default function EditPage() {
                   <Button onClick={addPhone} className="ml-2" variant="default">Telefon Ekle</Button>
 
                   <label htmlFor="fax" className="block text-sm font-medium text-muted-foreground">Fax</label>
-                  {(Array.isArray(faxs) ? faxs : []).map((fax, index) => (
+                  {faxs.map((fax, index) => (
                     <div key={index} className="flex items-center">
                       <Input
                         value={fax}
@@ -262,7 +264,8 @@ export default function EditPage() {
                   <Button onClick={addFax} className="ml-2" variant="default">Fax Ekle</Button>
 
                   <label htmlFor="email" className="block text-sm font-medium text-muted-foreground">E-posta</label>
-                  {(Array.isArray(emails) ? emails : []).map((email, index) => (
+
+                  {emails.map((email, index) => (
                     <div key={index} className="flex items-center">
                       <Input
                         value={email}

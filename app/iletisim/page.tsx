@@ -24,15 +24,29 @@ export default function Iletisim() {
         const datas = await fetchContactPageData();
         const contact = datas.contact || {};
         const socialmedia = datas.socialmedia || {};
-        
-        // Ensure array values
-        setPhones(contact?.phone ? [contact.phone] : []);
-        setFaxs(contact?.faxs ? [contact.faxs] : []);
-        setEmails(contact?.email ? [contact.email] : []);
-        
+
+        // Normalize phone and faxs to always be arrays of strings
+        const normalizeField = (field: any) => {
+          if (Array.isArray(field)) {
+            // If it's an array with a single comma-separated string, split it
+            if (field.length === 1 && typeof field[0] === "string" && field[0].includes(",")) {
+              return field[0].split(",").map((s) => s.trim());
+            }
+            return field;
+          }
+          if (typeof field === "string") {
+            return field.split(",").map((s) => s.trim());
+          }
+          return [];
+        };
+
+        setPhones(normalizeField(contact.phone));
+        setFaxs(normalizeField(contact.faxs));
+        setEmails(Array.isArray(contact.email) ? contact.email : contact.email ? [contact.email] : []);
+
         setAddress(contact?.address || "");
         setGoogleMapsLink(contact?.maps || null);
-        
+
         setFacebook(socialmedia?.facebook || "");
         setTwitter(socialmedia?.twitter || "");
         setYoutube(socialmedia?.youtube || "");
