@@ -24,29 +24,15 @@ export default function Iletisim() {
         const datas = await fetchContactPageData();
         const contact = datas.contact || {};
         const socialmedia = datas.socialmedia || {};
-
-        // Normalize phone and faxs to always be arrays of strings
-        const normalizeField = (field: string | string[] | undefined | null): string[] => {
-          if (Array.isArray(field)) {
-            // If it's an array with a single comma-separated string, split it
-            if (field.length === 1 && typeof field[0] === "string" && field[0].includes(",")) {
-              return field[0].split(",").map((s) => s.trim());
-            }
-            return field;
-          }
-          if (typeof field === "string") {
-            return field.split(",").map((s) => s.trim());
-          }
-          return [];
-        };
-
-        setPhones(normalizeField(contact.phone));
-        setFaxs(normalizeField(contact.faxs));
-        setEmails(Array.isArray(contact.email) ? contact.email : contact.email ? [contact.email] : []);
-
+        
+        // Ensure array values
+        setPhones(contact?.phone ? [contact.phone] : []);
+        setFaxs(contact?.faxs ? [contact.faxs] : []);
+        setEmails(contact?.email ? [contact.email] : []);
+        
         setAddress(contact?.address || "");
         setGoogleMapsLink(contact?.maps || null);
-
+        
         setFacebook(socialmedia?.facebook || "");
         setTwitter(socialmedia?.twitter || "");
         setYoutube(socialmedia?.youtube || "");
@@ -136,32 +122,35 @@ export default function Iletisim() {
 
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">Telefon</h2>
-                {/*<p>444 0 155</p>*/}
+                <p>444 0 155</p>
+                {/*
                 {(Array.isArray(phones) ? phones : []).map((phone, index) => (
                   <span key={index}>{phone}{index < phones.length - 1 ? <br /> : ""}</span>
-                ))}
+                ))}*/}
               </div>
 
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">Fax</h2>
-                {/*<p>0(332) 350 43 04</p>*/}
+                <p>0(332) 350 43 04</p>
+                {/*
                 {(Array.isArray(faxs) ? faxs : []).map((fax, index) => (
                   <span key={index}>{fax}{index < faxs.length - 1? <br /> : ""}</span>
-                ))}
+                ))}*/}
               </div>
 
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">E-Posta</h2>
-                {/*<p>bilgi@kontv.com.tr</p>*/}
+                <p>bilgi@kontv.com.tr</p>
+                {/*
                 {(Array.isArray(emails) ? emails : []).map((email, index) => (
                   <span key={index}>{email}{index < emails.length - 1? <br /> : ""}</span>
-                ))}
+                ))}*/}
               </div>
               
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">Kep Adresi</h2>
-                {/*<p>kontv@hs03.kep.tr</p>*/}
-                {Array.isArray(emails) && emails[1]}
+                <p>kontv@hs03.kep.tr</p>
+                {/*{Array.isArray(emails) && emails[1]}*/}
               </div>
             </div>
           </div>
