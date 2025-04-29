@@ -22,18 +22,22 @@ export default function Iletisim() {
     const fetchData = async () => {
       try {
         const datas = await fetchContactPageData();
-        const contact = datas.contact;
-        const socialmedia = datas.socialmedia;
-        setPhones(contact.phone);
-        setFaxs(contact.faxs);
-        setEmails(contact.email);
-        setAddress(contact.address);
-        setGoogleMapsLink(contact.maps);
-        setFacebook(socialmedia.facebook);
-        setTwitter(socialmedia.twitter);
-        setYoutube(socialmedia.youtube);
-        setInstagram(socialmedia.instagram);
-        setLinkedin(socialmedia.linkedin);
+        const contact = datas.contact || {};
+        const socialmedia = datas.socialmedia || {};
+        
+        // Ensure array values
+        setPhones(contact?.phone ? [contact.phone] : []);
+        setFaxs(contact?.faxs ? [contact.faxs] : []);
+        setEmails(contact?.email ? [contact.email] : []);
+        
+        setAddress(contact?.address || "");
+        setGoogleMapsLink(contact?.maps || null);
+        
+        setFacebook(socialmedia?.facebook || "");
+        setTwitter(socialmedia?.twitter || "");
+        setYoutube(socialmedia?.youtube || "");
+        setInstagram(socialmedia?.instagram || "");
+        setLinkedin(socialmedia?.linkedin || "");
       }
       catch (error) {
         console.error("Veri çekilirken hata oluştu:", error);
@@ -119,7 +123,7 @@ export default function Iletisim() {
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">Telefon</h2>
                 {/*<p>444 0 155</p>*/}
-                {phones && phones.map((phone, index) => (
+                {(Array.isArray(phones) ? phones : []).map((phone, index) => (
                   <span key={index}>{phone}{index < phones.length - 1 ? <br /> : ""}</span>
                 ))}
               </div>
@@ -127,7 +131,7 @@ export default function Iletisim() {
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">Fax</h2>
                 {/*<p>0(332) 350 43 04</p>*/}
-                {faxs && faxs.map((fax, index) => (
+                {(Array.isArray(faxs) ? faxs : []).map((fax, index) => (
                   <span key={index}>{fax}{index < faxs.length - 1? <br /> : ""}</span>
                 ))}
               </div>
@@ -135,15 +139,15 @@ export default function Iletisim() {
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">E-Posta</h2>
                 {/*<p>bilgi@kontv.com.tr</p>*/}
-                {emails && emails.map((email, index) => (
+                {(Array.isArray(emails) ? emails : []).map((email, index) => (
                   <span key={index}>{email}{index < emails.length - 1? <br /> : ""}</span>
                 ))}
               </div>
-
+              
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4">Kep Adresi</h2>
                 {/*<p>kontv@hs03.kep.tr</p>*/}
-                {emails[1]}
+                {Array.isArray(emails) && emails[1]}
               </div>
             </div>
           </div>
